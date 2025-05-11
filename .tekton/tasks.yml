@@ -1,1 +1,12 @@
-"apiVersion: tekton.dev/v1beta1" 
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: cleanup-workspace
+spec:
+  steps:
+    - name: delete-temp-files
+      image: alpine
+      script: |
+        #!/bin/sh
+        echo "Cleaning up temporary files..."
+        rm -rf /workspace/source/tmp || true
